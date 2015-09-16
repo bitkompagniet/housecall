@@ -1,0 +1,23 @@
+{
+  "name": "housecall",
+  "version": "0.1.0",
+  "description": "A function and promise queue",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bitkompagniet/housecall.git"
+  },
+  "keywords": [
+    "promise",
+    "queue"
+  ],
+  "author": "Kristian Videmark Parkov <parkov@bitkompagniet.dk>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bitkompagniet/housecall/issues"
+  },
+  "homepage": "https://github.com/bitkompagniet/housecall#readme"
+}
