@@ -16,6 +16,7 @@ var housecall = require("housecall");
 var Promise = require("bluebird");
 var request = Promise.promisify(require('request'));
 
+// housecall(function(value) {}, [maximum concurrent queue items])
 var queue = housecall(request, 1);
 
 queue.on("added", function(value) {
