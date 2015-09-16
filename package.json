@@ -1,10 +1,10 @@
 {
   "name": "housecall",
   "version": "0.1.0",
-  "description": "A function and promise queue",
+  "description": "A function queue that returns promises. Simple and sweet.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,13 @@
   "bugs": {
     "url": "https://github.com/bitkompagniet/housecall/issues"
   },
-  "homepage": "https://github.com/bitkompagniet/housecall#readme"
+  "homepage": "https://github.com/bitkompagniet/housecall#readme",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.3.2"
+  },
+  "dependencies": {
+    "bluebird": "^2.10.0",
+    "extend": "^3.0.0"
+  }
 }
