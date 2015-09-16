@@ -1,7 +1,7 @@
 {
   "name": "housecall",
   "version": "0.1.0",
-  "description": "A function queue that returns promises. Simple and sweet.",
+  "description": "A promise queue. Simple and sweet.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
