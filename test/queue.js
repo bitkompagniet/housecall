@@ -15,8 +15,6 @@ var wait = function(time) {
 
 };
 
-
-
 describe("Queue(function, [concurrency])", function() {
 
 	var queue = require("../lib/queue");

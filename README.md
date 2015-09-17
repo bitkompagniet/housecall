@@ -11,12 +11,11 @@ npm install housecall
 ## Usage
 
 ```javascript
-
 var housecall = require("housecall");
 var Promise = require("bluebird");
 var request = Promise.promisify(require('request'));
 
-// housecall(function(value) {}, [maximum concurrent queue items])
+// housecall(function(value) { return promise; }, [maximum concurrent queue items])
 var queue = housecall(request, 1);
 
 queue.on("added", function(value) {
@@ -48,3 +47,9 @@ queue.push(["http://www.google.com", "https://twitter.com/", "https://www.reddit
 	// All eventual responses.
 });
 ```
+
+## Promises
+
+You should always initialize housecall with a function that returns a promise. Otherwise, results will not be as expected.
+
+If you want to create a queue for a node style function, utilizing a callback function, you should [promisify that function](https://github.com/petkaantonov/bluebird/blob/master/API.md#promisification).
