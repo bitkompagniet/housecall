@@ -1,6 +1,6 @@
 {
   "name": "housecall",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A promise queue. Simple and sweet.",
   "main": "index.js",
   "scripts": {

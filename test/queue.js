@@ -62,7 +62,7 @@ describe("Queue(function, [concurrency])", function() {
 
 		var addedPromise = new Promise(function(resolve, reject) {
 			q.on("added", function(value) {
-				value.should.be.an("array");
+				value.should.be.an("object").with.property("then");
 				resolve();
 			});
 		});
@@ -159,6 +159,27 @@ describe("Queue(function, [concurrency])", function() {
 				promise.isPending().should.equal(false);
 				promise.isFulfilled().should.equal(true);
 				promise.value().should.equal("Resolved!");
+			});
+
+		});
+
+		it("should return a Promise.all when adding an array", function() {
+
+			var q = queue(wait, 1);
+			q.pause();
+
+			var promise = q.push([100, 100, 100]);
+			
+			promise.should.have.property("then").that.is.a("function");
+
+			q.start();
+
+			return promise.then(function(results) {
+				results.should.be.an("array");
+
+				results.forEach(function(item) {
+					item.should.be.a("string");
+				});
 			});
 
 		});

@@ -18,33 +18,17 @@ var request = Promise.promisify(require('request'));
 // housecall(function(value) { return promise; }, [maximum concurrent queue items])
 var queue = housecall(request, 1);
 
-queue.on("added", function(value) {
-	// Something was added.
-});
-
-queue.push("http://www.google.com");
-
 queue.push("https://twitter.com/").spread(function(response, body) {
 	// The eventual response of Twitter
 });
 
-queue.push("https://www.reddit.com/");
-
-queue.on("progress", function(value) {
-	// Something was completed.
-});
-
-queue.on("done", function() {
-	// The queue is done.
-});
-
 ```
 
-It is possible to push an array of items. The return value will be an array of promises.
+It is possible to push an array of items. The return value will be an promise resolving all these items.
 
 ```javascript
-queue.push(["http://www.google.com", "https://twitter.com/", "https://www.reddit.com/"]).all(function(responses) {
-	// All eventual responses.
+queue.push(["http://www.google.com", "https://twitter.com/", "https://www.reddit.com/"]).then(function(results) {
+	// Results from the above 3 calls.
 });
 ```
 
