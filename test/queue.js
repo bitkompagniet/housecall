@@ -17,6 +17,8 @@ var wait = function(time) {
 
 describe("Queue(function, [concurrency])", function() {
 
+	this.slow(700);
+
 	var queue = require("../lib/queue");
 
 	it("Should only accept arguments of the correct form", function() {
@@ -94,6 +96,8 @@ describe("Queue(function, [concurrency])", function() {
 		return Promise.all([addedPromise, progressPromise, donePromise]);
 
 	});
+
+	it("should emit 'done' again, if more items are added after end");
 
 	describe(".push(item)", function() {
 
@@ -176,6 +180,7 @@ describe("Queue(function, [concurrency])", function() {
 
 			return promise.then(function(results) {
 				results.should.be.an("array");
+				results.length.should.equal(3);
 
 				results.forEach(function(item) {
 					item.should.be.a("string");
@@ -183,6 +188,8 @@ describe("Queue(function, [concurrency])", function() {
 			});
 
 		});
+
+		it("should fail gracefully and continue even if one or more items are rejected");
 
 	});
 
