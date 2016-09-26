@@ -1,6 +1,7 @@
 const should = require("chai").should();
 const queue = require('../lib/queue');
 const Chance = require('chance');
+const chance = new Chance();
 
 describe("queue()", function() {
 
@@ -15,8 +16,15 @@ describe("queue()", function() {
 		queue().should.be.an('object');
 	});
 
-	it('should have methods push, delay, ', function() {
+	it('should have methods push, delay, running, pending', function() {
 		queue().push.should.be.a('function');
+		queue().delay.should.be.a('function');
+		queue().running.should.be.a('function');
+		queue().pending.should.be.a('function');
+	});
+
+	it('should fail if we feed it a non-function', function() {
+		should.throw(() => queue().push('test'));
 	});
 
 	it('should continue on error', function() {
@@ -32,18 +40,17 @@ describe("queue()", function() {
 		});
 	});
 
-	it('should wait for a cooldown of 40 ms', function() {
-		const q = queue({ concurrency: 3, cooldown: 40 });
-		const f = index => q.delay(40).then(() => index);
+	it('should wait for a cooldown of 50 ms', function() {
+		const q = queue({ concurrency: 1000, cooldown: 50 });
+		const f = index => q.delay(1000).then(() => index);
 
-		for (let i = 0; i < 9; i++) q.push(() => f(i));
+		for (let i = 0; i < 10; i++) q.push(() => f(i));
 
-		q.running().should.equal(3);
-
-		return q.delay(60)
-			.then(() => q.running().should.equal(0) && q.delay(40))
-			.then(() => q.running().should.equal(3) && q.delay(40))
-			.then(() => q.running().should.equal(0));
+		//return q.delay(2000000);
+		return q.delay(30)
+			.then(() => q.running().should.equal(0) && q.delay(50))
+			.then(() => q.running().should.equal(1) && q.delay(50))
+			.then(() => q.running().should.equal(2));
 	});
 	
 });

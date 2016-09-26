@@ -1,5 +1,10 @@
-Push functions returning a function to the queue. Set the concurrency, and
+Push promise-returning functions to the queue. Set the concurrency, and
 optionally a cooldown.
+
+The queue is best understood as an airport runway: each function takes off
+with a minimum distance of the cooldown in milliseconds. Concurrency is the
+number of flights that can currently be in the air. When promises resolve, the
+plane has landed.
 
 ## Install
 
@@ -16,20 +21,22 @@ var axios = require('axios');
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 
 queue.push(() => axios.get('https://twitter.com/').then((response, body) => {
-	// The eventual response of Twitter
+	// The eventual response of Twitter	
 }));
 
+// This request will not start until 1000 ms after the above.
 queue.push(() => axios.get('https://some.com/').then((response, body) => {
 	// ...
 }));
 
+// This will not run until of the above have terminated.
 queue.push(() => axios.get('https://test.com/').then((response, body) => {
-	// This will not run until time of termination of one of the above + 1000 ms.
+	// ...
 }));
 
 ```
 
-Make sure you wrap the function. Otherwise it will run immediately and defeat the purpose of the queue.
+Make sure you wrap the function. Otherwise it will run immediately, and defeat the purpose of the queue.
 
 ```javascript
 // WILL NOT BE CORRECTLY ENQUEUED
