@@ -45,7 +45,16 @@ queue.push(axios.get('https://twitter.com/').then((response, body) => {
 }));
 ```
 
+## Events
+
+Whenever the queue is empty after handling tasks, it will emit an 'idle' event.
+
+```javascript
+queue.on('idle', function(noTasksCompleted, noTasksWithError) {
+	// Do something
+});
+```
+
 ## Errors
 
-The queue continues on any error, but the error will be outputted to `housecall:queue:error`. Set `DEBUG=housecall:queue:error`
-to see it.
+The queue continues on any error, but the error will be outputted to stdout.
