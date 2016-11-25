@@ -1,0 +1,5 @@
+node_modules/
+frontend/components/
+frontend/bower_components/
+frontend/static/
+frontend/browserify/sprinkles/
