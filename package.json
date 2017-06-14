@@ -33,6 +33,6 @@
   },
   "dependencies": {
     "lodash": "^4.16.2",
-    "rumor": "^1.0.0"
+    "rumor": "^1.1.0"
   }
 }
