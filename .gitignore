@@ -1,5 +1,8 @@
 # Created by https://www.gitignore.io/api/node
 
+### JS files in test
+test/**/*.js
+
 ### Node ###
 # Logs
 logs
@@ -29,3 +32,4 @@ build/Release
 # Dependency directory
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
+dist/
